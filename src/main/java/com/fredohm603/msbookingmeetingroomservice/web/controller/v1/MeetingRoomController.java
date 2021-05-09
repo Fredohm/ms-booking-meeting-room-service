@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -44,5 +45,10 @@ public class MeetingRoomController {
     @GetMapping("/meeting-room/{id}")
     public ResponseEntity<MeetingRoomDto> getMeetingRoomById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(meetingRoomService.getById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/meeting-room")
+    public ResponseEntity<MeetingRoomDto> addMeetingRoom(@Validated @RequestBody MeetingRoomDto dto) {
+        return new ResponseEntity<>(meetingRoomService.saveNewMeetingRoom(dto), HttpStatus.CREATED);
     }
 }

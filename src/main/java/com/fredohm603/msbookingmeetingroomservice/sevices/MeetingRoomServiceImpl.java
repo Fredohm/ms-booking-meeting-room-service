@@ -55,7 +55,9 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 
     @Override
     public MeetingRoomDto saveNewMeetingRoom(MeetingRoomDto meetingRoomDto) {
-        return null;
+        return meetingRoomMapper.meetingRoomToMeetingRoomDto(
+                meetingRoomRepository.save(
+                        meetingRoomMapper.meetingRoomDtoToMeetingRoom(meetingRoomDto)));
     }
 
     @Override
